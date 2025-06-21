@@ -65,6 +65,11 @@ Zero-setup hosted solution with advanced features and priority support
 
 ## News and Updates
 
+## Jun 21, 2025
+
+v0.30 was [released](https://github.com/qodo-ai/pr-agent/releases)
+
+
 ## Jun 3, 2025
 
 Qodo Merge now offers a simplified free tier 💎.
@@ -107,7 +112,7 @@ Supported commands per platform:
 |                                                         | ⮑ [Ask on code lines](https://qodo-merge-docs.qodo.ai/tools/ask/#ask-lines)                                         |   ✅   |   ✅   |           |              |       |
 |                                                         | [Help Docs](https://qodo-merge-docs.qodo.ai/tools/help_docs/?h=auto#auto-approval)                                  |   ✅   |   ✅   |    ✅     |              |       |
 |                                                         | [Update CHANGELOG](https://qodo-merge-docs.qodo.ai/tools/update_changelog/)                                         |   ✅   |   ✅   |    ✅     |      ✅      |       |
-|                                                         | [PR Documentation](https://qodo-merge-docs.qodo.ai/tools/documentation/) 💎                                         |   ✅   |   ✅   |           |              |       |
+|                                                         | [Add Documentation](https://qodo-merge-docs.qodo.ai/tools/documentation/) 💎                                        |   ✅   |   ✅   |           |              |       |
 |                                                         | [Analyze](https://qodo-merge-docs.qodo.ai/tools/analyze/) 💎                                                        |   ✅   |   ✅   |           |              |       |
 |                                                         | [Auto-Approve](https://qodo-merge-docs.qodo.ai/tools/improve/?h=auto#auto-approval) 💎                              |   ✅   |   ✅   |    ✅     |              |       |
 |                                                         | [CI Feedback](https://qodo-merge-docs.qodo.ai/tools/ci_feedback/) 💎                                                |   ✅   |        |           |              |       |
