@@ -57,23 +57,30 @@ Everything below this marker is treated as previously auto-generated content and
 ![Describe comment](https://codium.ai/images/pr_agent/pr_description_user_description.png){width=512}
 
 ### Sequence Diagram Support 
-When the `enable_pr_diagram` option is enabled in your configuration, the `/describe` tool will include a `Mermaid` sequence diagram in the PR description.
+The `/describe` tool includes a Mermaid sequence diagram showing component/function interactions. 
 
-This diagram represents interactions between components/functions based on the diff content.
+This option is enabled by default via the `pr_description.enable_pr_diagram` param.
 
-### How to enable
 
-In your configuration:
+[//]: # (### How to enable\disable)
 
-```
-toml
-[pr_description]
-enable_pr_diagram = true
-```
+[//]: # ()
+[//]: # (In your configuration:)
+
+[//]: # ()
+[//]: # (```)
+
+[//]: # (toml)
+
+[//]: # ([pr_description])
+
+[//]: # (enable_pr_diagram = true)
+
+[//]: # (```)
 
 ## Configuration options
 
-!!! example "Possible configurations"
+???+ example "Possible configurations"
 
     <table>
       <tr>
@@ -126,7 +133,7 @@ enable_pr_diagram = true
       </tr>
       <tr>
         <td><b>enable_pr_diagram</b></td>
-        <td>If set to true, the tool will generate a horizontal Mermaid flowchart summarizing the main pull request changes. This field remains empty if not applicable. Default is false.</td>
+        <td>If set to true, the tool will generate a horizontal Mermaid flowchart summarizing the main pull request changes. This field remains empty if not applicable. Default is true.</td>
       </tr>
     </table>
 
