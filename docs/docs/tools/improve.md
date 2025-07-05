@@ -437,9 +437,26 @@ dual_publishing_score_threshold = x
 
 Where x represents the minimum score threshold (>=) for suggestions to be presented as committable PR comments in addition to the table. Default is -1 (disabled).
 
+### Controlling suggestions depth
+
+> `💎 feature`
+
+You can control the depth and comprehensiveness of the code suggestions by using the `pr_code_suggestions.suggestions_depth` parameter.
+
+Available options:
+
+- `selective` - Shows only suggestions above a score threshold of 6
+- `regular` - Default mode with balanced suggestion coverage  
+- `exhaustive` - Provides maximum suggestion comprehensiveness
+
+(Alternatively, use numeric values: 1, 2, or 3 respectively)
+
+We recommend starting with `regular` mode, then exploring `exhaustive` mode, which can provide more comprehensive suggestions and enhanced bug detection.
+
+
 ### Self-review
 
-> `💎 feature` Platforms supported: GitHub, GitLab
+> `💎 feature. Platforms supported: GitHub, GitLab`
 
 If you set in a configuration file:
 
@@ -483,86 +500,6 @@ code_suggestions_self_review_text = "... (your text here) ..."
 
         To prevent unauthorized approvals, this configuration defaults to false, and cannot be altered through online comments; enabling requires a direct update to the configuration file and a commit to the repository. This ensures that utilizing the feature demands a deliberate documented decision by the repository owner.
 
-### Auto-approval
-
-> `💎 feature. Platforms supported: GitHub, GitLab, Bitbucket`
-
-Under specific conditions, Qodo Merge can auto-approve a PR when a specific comment is invoked, or when the PR meets certain criteria.
-
-**To ensure safety, the auto-approval feature is disabled by default.**
-To enable auto-approval features, you need to actively set one or both of the following options in a pre-defined _configuration file_:
-
-```toml
-[config]
-enable_comment_approval = true # For approval via comments
-enable_auto_approval = true   # For criteria-based auto-approval
-```
-
-!!! note "Notes"
-    - Note that this specific flag cannot be set with a command line argument, only in the configuration file, committed to the repository.
-    - Enabling auto-approval must be a deliberate decision by the repository owner.
-
-1\. **Auto-approval by commenting**
-
-To enable auto-approval by commenting, set in the configuration file:
-
-```toml
-[config]
-enable_comment_approval = true
-```
-
-After enabling, by commenting on a PR:
-
-```
-/review auto_approve
-```
-
-Qodo Merge will automatically approve the PR, and add a comment with the approval.
-
-2\. **Auto-approval when the PR meets certain criteria**
-
-To enable auto-approval based on specific criteria, first, you need to enable the top-level flag:
-
-```toml
-[config]
-enable_auto_approval = true
-```
-
-There are several criteria that can be set for auto-approval:
-
-- **Review effort score**
-
-```toml
-[config]
-enable_auto_approval = true
-auto_approve_for_low_review_effort = X # X is a number between 1 to 5
-```
-
-When the [review effort score](https://www.qodo.ai/images/pr_agent/review3.png) is lower or equal to X, the PR will be auto-approved.
-
-___
-
-- **No code suggestions**
-
-```toml
-[config]
-enable_auto_approval = true
-auto_approve_for_no_suggestions = true
-```
-
-When no [code suggestions](https://www.qodo.ai/images/pr_agent/code_suggestions_as_comment_closed.png) were found for the PR, the PR will be auto-approved.
-
-___
-
-- **Ticket Compliance**
-
-```toml
-[config]
-enable_auto_approval = true
-ensure_ticket_compliance = true # Default is false
-```
-
-If `ensure_ticket_compliance` is set to `true`, auto-approval will be disabled if a ticket is linked to the PR and the ticket is not compliant (e.g., the `review` tool did not mark the PR as fully compliant with the ticket). This ensures that PRs are only auto-approved if their associated tickets are properly resolved.
 
 ### How many code suggestions are generated?
 
@@ -586,7 +523,7 @@ Note: Chunking is primarily relevant for large PRs. For most PRs (up to 600 line
 
 ## Configuration options
 
-??? example "General options"
+???+ example "General options"
 
     <table>
       <tr>
@@ -600,6 +537,10 @@ Note: Chunking is primarily relevant for large PRs. For most PRs (up to 600 line
       <tr>
         <td><b>enable_chat_in_code_suggestions</b></td>
         <td>If set to true, QM bot will interact with comments made on code changes it has proposed. Default is true.</td>
+      </tr>
+      <tr>
+        <td><b>suggestions_depth 💎</b></td>
+        <td> Controls the depth of the suggestions. Can be set to 'selective', 'regular', or 'exhaustive'. Default is 'regular'.</td>
       </tr>
       <tr>
         <td><b>dual_publishing_score_threshold</b></td>
@@ -646,7 +587,7 @@ Note: Chunking is primarily relevant for large PRs. For most PRs (up to 600 line
       </tr>
     </table>
 
-??? example "Params for number of suggestions and AI calls"
+???+ example "Params for number of suggestions and AI calls"
 
     <table>
       <tr>

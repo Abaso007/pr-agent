@@ -59,6 +59,7 @@ class PRDescription:
 
         # Initialize the variables dictionary
         self.COLLAPSIBLE_FILE_LIST_THRESHOLD = get_settings().pr_description.get("collapsible_file_list_threshold", 8)
+        enable_pr_diagram = get_settings().pr_description.get("enable_pr_diagram", False) and self.git_provider.is_supported("gfm_markdown") # github and gitlab support gfm_markdown
         self.vars = {
             "title": self.git_provider.pr.title,
             "branch": self.git_provider.get_pr_branch(),
@@ -73,7 +74,7 @@ class PRDescription:
             "related_tickets": "",
             "include_file_summary_changes": len(self.git_provider.get_diff_files()) <= self.COLLAPSIBLE_FILE_LIST_THRESHOLD,
             "duplicate_prompt_examples": get_settings().config.get("duplicate_prompt_examples", False),
-            "enable_pr_diagram": get_settings().pr_description.get("enable_pr_diagram", False),
+            "enable_pr_diagram": enable_pr_diagram,
         }
 
         self.user_description = self.git_provider.get_user_description()
@@ -536,6 +537,11 @@ class PRDescription:
             except Exception as e:
                 get_logger().error(f"Failing to process walkthrough {self.pr_id}: {e}")
                 body = body.replace('pr_agent:walkthrough', "")
+
+        # Add support for pr_agent:diagram marker (plain and HTML comment formats)
+        ai_diagram = self.data.get('changes_diagram')
+        if ai_diagram:
+            body = re.sub(r'<!--\s*pr_agent:diagram\s*-->|pr_agent:diagram', ai_diagram, body)
 
         return title, body, walkthrough_gfm, pr_file_changes
 
